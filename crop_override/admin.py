@@ -12,7 +12,7 @@ from .field import CropOverride
 def save_crops (obj, request):
   for f in obj._meta.fields:
     if isinstance(f, CropOverride):
-      crop_data = request.REQUEST.get('crop_' + f.name, '')
+      crop_data = getattr(request,request.method).get('crop_' + f.name, '')
       if crop_data:
         crop_data = crop_data.split(',')
         if crop_data[4] == 0 or crop_data[5] == 0:
