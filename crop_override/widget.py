@@ -9,10 +9,18 @@ if SHOW_THUMB:
   from sorl.thumbnail import get_thumbnail
   
 class CropOverrideInput (forms.ClearableFileInput):
+  template_with_initial = (
+    '%(initial_text)s: <a href="%(initial_url)s">%(initial)s</a> '
+    '%(clear_template)s<br />%(input_text)s: %(input)s'
+  )
+
+  template_with_clear = '%(clear)s <label for="%(clear_checkbox_id)s">%(clear_checkbox_label)s</label>'
+  
   def __init__ (self, original, aspect, attrs=None):
     self.original = original
     self.aspect = aspect
     super(CropOverrideInput, self).__init__(attrs=attrs)
+    
     
   def render (self, name, value, attrs=None):
     tmp = self.aspect.split('x')
