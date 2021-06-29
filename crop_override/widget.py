@@ -66,6 +66,13 @@ class AdminCropOverrideInput (CropOverrideInput):
   template_with_clear = (u'<span class="clearable-file-input">%s</span>' % CropOverrideInput.template_with_clear)
   
 class OriginalInput (forms.ClearableFileInput):
+  template_with_initial = (
+    '%(initial_text)s: <a href="%(initial_url)s">%(initial)s</a> '
+    '%(clear_template)s<br />%(input_text)s: %(input)s'
+  )
+
+  template_with_clear = '%(clear)s <label for="%(clear_checkbox_id)s">%(clear_checkbox_label)s</label>'
+  
   def render (self, name, value, attrs=None):
     thumb = ''
     if SHOW_THUMB and value:
