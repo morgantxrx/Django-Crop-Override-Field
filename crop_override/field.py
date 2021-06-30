@@ -41,7 +41,8 @@ class OriginalField(forms.ImageField):
 
 class CropOverride(models.ImageField):
     def __init__(self, *args, **kwargs):
-        if "widget" in kwargs.keys() and "aspect" in kwargs.keys():
+        # if "widget" in kwargs.keys() and "aspect" in kwargs.keys():
+        if "original" in kwargs.keys() and "aspect" in kwargs.keys():
             self.original = kwargs['original']
             del kwargs['original']
 
